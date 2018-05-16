@@ -76,7 +76,6 @@
     <Compile Include="chauffeurs.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="history_visit.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

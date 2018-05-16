@@ -82,14 +82,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="EditForms\FormEditCarsRFID.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="EditForms\FormEditCarsRFID.Designer.cs">
+      <DependentUpon>FormEditCarsRFID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tables.Designer.cs">
+      <DependentUpon>Tables.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EditForms\FormEditCarsRFID.resx">
+      <DependentUpon>FormEditCarsRFID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tables.resx">
+      <DependentUpon>Tables.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -100,6 +112,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\DataModel.cars.datasource" />
+    <None Include="Properties\DataSources\DataModel.cars_c_RFID.datasource" />
+    <None Include="Properties\DataSources\DataModel.chauffeurs.datasource" />
+    <None Include="Properties\DataSources\DataModel.history_visit.datasource" />
+    <None Include="Properties\DataSources\DataModel.list_access.datasource" />
+    <None Include="Properties\DataSources\DataModel.RFID_metki.datasource" />
+    <None Include="Properties\DataSources\DataModel.status_active.datasource" />
+    <None Include="Properties\DataSources\DataModel.type_car.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -113,5 +133,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataModel\DataModel.csproj">
+      <Project>{0d33eb56-ea79-4cfb-ad9f-90d9f24afa8c}</Project>
+      <Name>DataModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
