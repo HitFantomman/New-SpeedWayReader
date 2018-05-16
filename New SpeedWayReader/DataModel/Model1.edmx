@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище SystemRFIDsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cars">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number_car" Type="varchar" MaxLength="16" />
+          <Property Name="chauffeur" Type="int" />
+          <Property Name="type_car" Type="int" />
+        </EntityType>
+        <EntityType Name="cars_c_RFID">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date_record" Type="date" />
+          <Property Name="epc" Type="int" />
+          <Property Name="number_car" Type="int" />
+          <Property Name="status_active" Type="int" />
+        </EntityType>
+        <EntityType Name="chauffeurs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" />
+          <Property Name="number_license" Type="int" />
+        </EntityType>
+        <EntityType Name="history_visit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date_visit" Type="date" />
+          <Property Name="number_car" Type="int" />
+          <Property Name="type_visit" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="list_access">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number_car" Type="int" />
+          <Property Name="status_access" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="RFID_metki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="epc" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="status_active">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="type_car">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_cars_c_RFID_cars">
+          <End Role="cars" Type="Self.cars" Multiplicity="0..1" />
+          <End Role="cars_c_RFID" Type="Self.cars_c_RFID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars_c_RFID">
+              <PropertyRef Name="number_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cars_c_RFID_RFID_metki">
+          <End Role="RFID_metki" Type="Self.RFID_metki" Multiplicity="0..1" />
+          <End Role="cars_c_RFID" Type="Self.cars_c_RFID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RFID_metki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars_c_RFID">
+              <PropertyRef Name="epc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cars_c_RFID_status_active">
+          <End Role="status_active" Type="Self.status_active" Multiplicity="0..1" />
+          <End Role="cars_c_RFID" Type="Self.cars_c_RFID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status_active">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars_c_RFID">
+              <PropertyRef Name="status_active" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cars_chauffeurs">
+          <End Role="chauffeurs" Type="Self.chauffeurs" Multiplicity="0..1" />
+          <End Role="cars" Type="Self.cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="chauffeurs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars">
+              <PropertyRef Name="chauffeur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cars_type_car">
+          <End Role="type_car" Type="Self.type_car" Multiplicity="0..1" />
+          <End Role="cars" Type="Self.cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_car">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars">
+              <PropertyRef Name="type_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_visit_cars">
+          <End Role="cars" Type="Self.cars" Multiplicity="0..1" />
+          <End Role="history_visit" Type="Self.history_visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history_visit">
+              <PropertyRef Name="number_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_list_access_cars">
+          <End Role="cars" Type="Self.cars" Multiplicity="0..1" />
+          <End Role="list_access" Type="Self.list_access" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="list_access">
+              <PropertyRef Name="number_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SystemRFIDsModelContainer">
+          <EntitySet Name="cars" EntityType="Self.cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cars_c_RFID" EntityType="Self.cars_c_RFID" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="chauffeurs" EntityType="Self.chauffeurs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="history_visit" EntityType="Self.history_visit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="list_access" EntityType="Self.list_access" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RFID_metki" EntityType="Self.RFID_metki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="status_active" EntityType="Self.status_active" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="type_car" EntityType="Self.type_car" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_cars_c_RFID_cars" Association="Self.FK_cars_c_RFID_cars">
+            <End Role="cars" EntitySet="cars" />
+            <End Role="cars_c_RFID" EntitySet="cars_c_RFID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cars_c_RFID_RFID_metki" Association="Self.FK_cars_c_RFID_RFID_metki">
+            <End Role="RFID_metki" EntitySet="RFID_metki" />
+            <End Role="cars_c_RFID" EntitySet="cars_c_RFID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cars_c_RFID_status_active" Association="Self.FK_cars_c_RFID_status_active">
+            <End Role="status_active" EntitySet="status_active" />
+            <End Role="cars_c_RFID" EntitySet="cars_c_RFID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cars_chauffeurs" Association="Self.FK_cars_chauffeurs">
+            <End Role="chauffeurs" EntitySet="chauffeurs" />
+            <End Role="cars" EntitySet="cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cars_type_car" Association="Self.FK_cars_type_car">
+            <End Role="type_car" EntitySet="type_car" />
+            <End Role="cars" EntitySet="cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_visit_cars" Association="Self.FK_history_visit_cars">
+            <End Role="cars" EntitySet="cars" />
+            <End Role="history_visit" EntitySet="history_visit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_list_access_cars" Association="Self.FK_list_access_cars">
+            <End Role="cars" EntitySet="cars" />
+            <End Role="list_access" EntitySet="list_access" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SystemRFIDsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cars">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number_car" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="chauffeur" Type="Int32" />
+          <Property Name="type_car" Type="Int32" />
+          <NavigationProperty Name="cars_c_RFID" Relationship="Self.FK_cars_c_RFID_cars" FromRole="cars" ToRole="cars_c_RFID" />
+          <NavigationProperty Name="chauffeurs" Relationship="Self.FK_cars_chauffeurs" FromRole="cars" ToRole="chauffeurs" />
+          <NavigationProperty Name="type_car1" Relationship="Self.FK_cars_type_car" FromRole="cars" ToRole="type_car" />
+          <NavigationProperty Name="history_visit" Relationship="Self.FK_history_visit_cars" FromRole="cars" ToRole="history_visit" />
+          <NavigationProperty Name="list_access" Relationship="Self.FK_list_access_cars" FromRole="cars" ToRole="list_access" />
+        </EntityType>
+        <EntityType Name="cars_c_RFID">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_record" Type="DateTime" Precision="0" />
+          <Property Name="epc" Type="Int32" />
+          <Property Name="number_car" Type="Int32" />
+          <Property Name="status_active" Type="Int32" />
+          <NavigationProperty Name="cars" Relationship="Self.FK_cars_c_RFID_cars" FromRole="cars_c_RFID" ToRole="cars" />
+          <NavigationProperty Name="RFID_metki" Relationship="Self.FK_cars_c_RFID_RFID_metki" FromRole="cars_c_RFID" ToRole="RFID_metki" />
+          <NavigationProperty Name="status_active1" Relationship="Self.FK_cars_c_RFID_status_active" FromRole="cars_c_RFID" ToRole="status_active" />
+        </EntityType>
+        <EntityType Name="chauffeurs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="number_license" Type="Int32" />
+          <NavigationProperty Name="cars" Relationship="Self.FK_cars_chauffeurs" FromRole="chauffeurs" ToRole="cars" />
+        </EntityType>
+        <EntityType Name="history_visit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_visit" Type="DateTime" Precision="0" />
+          <Property Name="number_car" Type="Int32" />
+          <Property Name="type_visit" Type="Byte" />
+          <NavigationProperty Name="cars" Relationship="Self.FK_history_visit_cars" FromRole="history_visit" ToRole="cars" />
+        </EntityType>
+        <EntityType Name="list_access">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number_car" Type="Int32" />
+          <Property Name="status_access" Type="Byte" />
+          <NavigationProperty Name="cars" Relationship="Self.FK_list_access_cars" FromRole="list_access" ToRole="cars" />
+        </EntityType>
+        <EntityType Name="RFID_metki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="epc" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cars_c_RFID" Relationship="Self.FK_cars_c_RFID_RFID_metki" FromRole="RFID_metki" ToRole="cars_c_RFID" />
+        </EntityType>
+        <EntityType Name="status_active">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cars_c_RFID" Relationship="Self.FK_cars_c_RFID_status_active" FromRole="status_active" ToRole="cars_c_RFID" />
+        </EntityType>
+        <EntityType Name="type_car">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cars" Relationship="Self.FK_cars_type_car" FromRole="type_car" ToRole="cars" />
+        </EntityType>
+        <Association Name="FK_cars_c_RFID_cars">
+          <End Role="cars" Type="Self.cars" Multiplicity="0..1" />
+          <End Role="cars_c_RFID" Type="Self.cars_c_RFID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars_c_RFID">
+              <PropertyRef Name="number_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cars_chauffeurs">
+          <End Role="chauffeurs" Type="Self.chauffeurs" Multiplicity="0..1" />
+          <End Role="cars" Type="Self.cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="chauffeurs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars">
+              <PropertyRef Name="chauffeur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cars_type_car">
+          <End Role="type_car" Type="Self.type_car" Multiplicity="0..1" />
+          <End Role="cars" Type="Self.cars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_car">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars">
+              <PropertyRef Name="type_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_history_visit_cars">
+          <End Role="cars" Type="Self.cars" Multiplicity="0..1" />
+          <End Role="history_visit" Type="Self.history_visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="history_visit">
+              <PropertyRef Name="number_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_list_access_cars">
+          <End Role="cars" Type="Self.cars" Multiplicity="0..1" />
+          <End Role="list_access" Type="Self.list_access" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cars">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="list_access">
+              <PropertyRef Name="number_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cars_c_RFID_RFID_metki">
+          <End Role="RFID_metki" Type="Self.RFID_metki" Multiplicity="0..1" />
+          <End Role="cars_c_RFID" Type="Self.cars_c_RFID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RFID_metki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars_c_RFID">
+              <PropertyRef Name="epc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cars_c_RFID_status_active">
+          <End Role="status_active" Type="Self.status_active" Multiplicity="0..1" />
+          <End Role="cars_c_RFID" Type="Self.cars_c_RFID" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status_active">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="cars_c_RFID">
+              <PropertyRef Name="status_active" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SystemRFIDsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cars" EntityType="Self.cars" />
+          <EntitySet Name="cars_c_RFID" EntityType="Self.cars_c_RFID" />
+          <EntitySet Name="chauffeurs" EntityType="Self.chauffeurs" />
+          <EntitySet Name="history_visit" EntityType="Self.history_visit" />
+          <EntitySet Name="list_access" EntityType="Self.list_access" />
+          <EntitySet Name="RFID_metki" EntityType="Self.RFID_metki" />
+          <EntitySet Name="status_active" EntityType="Self.status_active" />
+          <EntitySet Name="type_car" EntityType="Self.type_car" />
+          <AssociationSet Name="FK_cars_c_RFID_cars" Association="Self.FK_cars_c_RFID_cars">
+            <End Role="cars" EntitySet="cars" />
+            <End Role="cars_c_RFID" EntitySet="cars_c_RFID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cars_chauffeurs" Association="Self.FK_cars_chauffeurs">
+            <End Role="chauffeurs" EntitySet="chauffeurs" />
+            <End Role="cars" EntitySet="cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cars_type_car" Association="Self.FK_cars_type_car">
+            <End Role="type_car" EntitySet="type_car" />
+            <End Role="cars" EntitySet="cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_history_visit_cars" Association="Self.FK_history_visit_cars">
+            <End Role="cars" EntitySet="cars" />
+            <End Role="history_visit" EntitySet="history_visit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_list_access_cars" Association="Self.FK_list_access_cars">
+            <End Role="cars" EntitySet="cars" />
+            <End Role="list_access" EntitySet="list_access" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cars_c_RFID_RFID_metki" Association="Self.FK_cars_c_RFID_RFID_metki">
+            <End Role="RFID_metki" EntitySet="RFID_metki" />
+            <End Role="cars_c_RFID" EntitySet="cars_c_RFID" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cars_c_RFID_status_active" Association="Self.FK_cars_c_RFID_status_active">
+            <End Role="status_active" EntitySet="status_active" />
+            <End Role="cars_c_RFID" EntitySet="cars_c_RFID" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SystemRFIDsModelContainer" CdmEntityContainer="SystemRFIDsEntities">
+          <EntitySetMapping Name="cars">
+            <EntityTypeMapping TypeName="SystemRFIDsModel.cars">
+              <MappingFragment StoreEntitySet="cars">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="number_car" ColumnName="number_car" />
+                <ScalarProperty Name="chauffeur" ColumnName="chauffeur" />
+                <ScalarProperty Name="type_car" ColumnName="type_car" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cars_c_RFID">
+            <EntityTypeMapping TypeName="SystemRFIDsModel.cars_c_RFID">
+              <MappingFragment StoreEntitySet="cars_c_RFID">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date_record" ColumnName="date_record" />
+                <ScalarProperty Name="epc" ColumnName="epc" />
+                <ScalarProperty Name="number_car" ColumnName="number_car" />
+                <ScalarProperty Name="status_active" ColumnName="status_active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chauffeurs">
+            <EntityTypeMapping TypeName="SystemRFIDsModel.chauffeurs">
+              <MappingFragment StoreEntitySet="chauffeurs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="number_license" ColumnName="number_license" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="history_visit">
+            <EntityTypeMapping TypeName="SystemRFIDsModel.history_visit">
+              <MappingFragment StoreEntitySet="history_visit">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date_visit" ColumnName="date_visit" />
+                <ScalarProperty Name="number_car" ColumnName="number_car" />
+                <ScalarProperty Name="type_visit" ColumnName="type_visit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="list_access">
+            <EntityTypeMapping TypeName="SystemRFIDsModel.list_access">
+              <MappingFragment StoreEntitySet="list_access">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="number_car" ColumnName="number_car" />
+                <ScalarProperty Name="status_access" ColumnName="status_access" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RFID_metki">
+            <EntityTypeMapping TypeName="SystemRFIDsModel.RFID_metki">
+              <MappingFragment StoreEntitySet="RFID_metki">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="epc" ColumnName="epc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status_active">
+            <EntityTypeMapping TypeName="SystemRFIDsModel.status_active">
+              <MappingFragment StoreEntitySet="status_active">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type_car">
+            <EntityTypeMapping TypeName="SystemRFIDsModel.type_car">
+              <MappingFragment StoreEntitySet="type_car">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
