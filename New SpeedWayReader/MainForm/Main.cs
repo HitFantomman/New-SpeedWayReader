@@ -50,6 +50,8 @@ namespace MainForm
                 {
                     MessageBox.Show("Считыватель не подключен!", "Подключение...", MessageBoxButtons.OK);
                     TimerTags.Enabled = false;
+                    Random rand = new Random();
+                    TimerTags.Interval = rand.Next(10000, 15000);
                     fsettings.ShowDialog();
                     TimerTags.Enabled = true;
                 }
@@ -64,11 +66,6 @@ namespace MainForm
                 // Ошибки программы
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void Main_Load(object sender, EventArgs e)
-        {
-
         }
 
         static void Delete_RoSpec()

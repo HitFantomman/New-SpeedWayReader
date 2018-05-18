@@ -364,7 +364,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SystemRFIDsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SystemRFIDsEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="cars" EntityType="Self.cars" />
           <EntitySet Name="cars_c_RFID" EntityType="Self.cars_c_RFID" />
           <EntitySet Name="chauffeurs" EntityType="Self.chauffeurs" />
@@ -497,7 +497,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />

@@ -33,14 +33,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BoxNumberCar = new System.Windows.Forms.TextBox();
             this.ViewHistory = new System.Windows.Forms.DataGridView();
-            this.MainBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.MenuMain = new System.Windows.Forms.MenuStrip();
-            this.TimerTags = new System.Windows.Forms.Timer(this.components);
             this.date_visit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.number_car = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.type_visit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.access = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.MenuMain = new System.Windows.Forms.MenuStrip();
+            this.TimerTags = new System.Windows.Forms.Timer(this.components);
+            this.MainBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ViewHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MainBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -97,9 +97,33 @@
             this.ViewHistory.TabIndex = 3;
             this.ViewHistory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ViewHistory_MouseClick);
             // 
-            // MainBindingSource
+            // date_visit
             // 
-            this.MainBindingSource.DataSource = typeof(DataModel.history_visit);
+            this.date_visit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.date_visit.HeaderText = "Дата проезда";
+            this.date_visit.Name = "date_visit";
+            this.date_visit.ReadOnly = true;
+            // 
+            // number_car
+            // 
+            this.number_car.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.number_car.HeaderText = "Номер машины";
+            this.number_car.Name = "number_car";
+            this.number_car.ReadOnly = true;
+            // 
+            // type_visit
+            // 
+            this.type_visit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.type_visit.HeaderText = "Тип проезда";
+            this.type_visit.Name = "type_visit";
+            this.type_visit.ReadOnly = true;
+            // 
+            // access
+            // 
+            this.access.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.access.HeaderText = "Доступ";
+            this.access.Name = "access";
+            this.access.ReadOnly = true;
             // 
             // label2
             // 
@@ -120,31 +144,12 @@
             // 
             // TimerTags
             // 
+            this.TimerTags.Interval = 10000;
             this.TimerTags.Tick += new System.EventHandler(this.TimerTags_Tick);
             // 
-            // date_visit
+            // MainBindingSource
             // 
-            this.date_visit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.date_visit.HeaderText = "Дата проезда";
-            this.date_visit.Name = "date_visit";
-            // 
-            // number_car
-            // 
-            this.number_car.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.number_car.HeaderText = "Номер машины";
-            this.number_car.Name = "number_car";
-            // 
-            // type_visit
-            // 
-            this.type_visit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.type_visit.HeaderText = "Тип проезда";
-            this.type_visit.Name = "type_visit";
-            // 
-            // access
-            // 
-            this.access.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.access.HeaderText = "Доступ";
-            this.access.Name = "access";
+            this.MainBindingSource.DataSource = typeof(DataModel.history_visit);
             // 
             // Main
             // 
@@ -166,7 +171,6 @@
             this.Text = "Главная форма";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
-            this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ViewHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MainBindingSource)).EndInit();
             this.ResumeLayout(false);
