@@ -33,15 +33,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.BoxNumberCar = new System.Windows.Forms.TextBox();
             this.ViewHistory = new System.Windows.Forms.DataGridView();
+            this.MainBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.MenuMain = new System.Windows.Forms.MenuStrip();
-            this.historyvisitBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.datevisitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numbercarDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typevisitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TimerTags = new System.Windows.Forms.Timer(this.components);
+            this.date_visit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.number_car = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type_visit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.access = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ViewHistory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.historyvisitBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MainBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnSettings
@@ -77,19 +78,28 @@
             // 
             // ViewHistory
             // 
-            this.ViewHistory.AutoGenerateColumns = false;
+            this.ViewHistory.AllowUserToAddRows = false;
+            this.ViewHistory.AllowUserToDeleteRows = false;
+            this.ViewHistory.AllowUserToResizeColumns = false;
+            this.ViewHistory.AllowUserToResizeRows = false;
             this.ViewHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ViewHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.datevisitDataGridViewTextBoxColumn,
-            this.numbercarDataGridViewTextBoxColumn,
-            this.typevisitDataGridViewTextBoxColumn});
-            this.ViewHistory.DataSource = this.historyvisitBindingSource;
+            this.date_visit,
+            this.number_car,
+            this.type_visit,
+            this.access});
             this.ViewHistory.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ViewHistory.Location = new System.Drawing.Point(0, 123);
             this.ViewHistory.Name = "ViewHistory";
+            this.ViewHistory.ReadOnly = true;
+            this.ViewHistory.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.ViewHistory.Size = new System.Drawing.Size(957, 373);
             this.ViewHistory.TabIndex = 3;
             this.ViewHistory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ViewHistory_MouseClick);
+            // 
+            // MainBindingSource
+            // 
+            this.MainBindingSource.DataSource = typeof(DataModel.history_visit);
             // 
             // label2
             // 
@@ -108,34 +118,33 @@
             this.MenuMain.TabIndex = 5;
             this.MenuMain.Text = "menuStrip1";
             // 
-            // historyvisitBindingSource
-            // 
-            this.historyvisitBindingSource.DataSource = typeof(DataModel.history_visit);
-            // 
-            // datevisitDataGridViewTextBoxColumn
-            // 
-            this.datevisitDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.datevisitDataGridViewTextBoxColumn.DataPropertyName = "date_visit";
-            this.datevisitDataGridViewTextBoxColumn.HeaderText = "Дата проезда";
-            this.datevisitDataGridViewTextBoxColumn.Name = "datevisitDataGridViewTextBoxColumn";
-            // 
-            // numbercarDataGridViewTextBoxColumn
-            // 
-            this.numbercarDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.numbercarDataGridViewTextBoxColumn.DataPropertyName = "number_car";
-            this.numbercarDataGridViewTextBoxColumn.HeaderText = "Номер машины";
-            this.numbercarDataGridViewTextBoxColumn.Name = "numbercarDataGridViewTextBoxColumn";
-            // 
-            // typevisitDataGridViewTextBoxColumn
-            // 
-            this.typevisitDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.typevisitDataGridViewTextBoxColumn.DataPropertyName = "type_visit";
-            this.typevisitDataGridViewTextBoxColumn.HeaderText = "Тип проезда";
-            this.typevisitDataGridViewTextBoxColumn.Name = "typevisitDataGridViewTextBoxColumn";
-            // 
             // TimerTags
             // 
             this.TimerTags.Tick += new System.EventHandler(this.TimerTags_Tick);
+            // 
+            // date_visit
+            // 
+            this.date_visit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.date_visit.HeaderText = "Дата проезда";
+            this.date_visit.Name = "date_visit";
+            // 
+            // number_car
+            // 
+            this.number_car.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.number_car.HeaderText = "Номер машины";
+            this.number_car.Name = "number_car";
+            // 
+            // type_visit
+            // 
+            this.type_visit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.type_visit.HeaderText = "Тип проезда";
+            this.type_visit.Name = "type_visit";
+            // 
+            // access
+            // 
+            this.access.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.access.HeaderText = "Доступ";
+            this.access.Name = "access";
             // 
             // Main
             // 
@@ -159,7 +168,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ViewHistory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.historyvisitBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MainBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,10 +182,11 @@
         private System.Windows.Forms.DataGridView ViewHistory;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MenuStrip MenuMain;
-        private System.Windows.Forms.DataGridViewTextBoxColumn datevisitDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn numbercarDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn typevisitDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource historyvisitBindingSource;
         private System.Windows.Forms.Timer TimerTags;
+        private System.Windows.Forms.BindingSource MainBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date_visit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn number_car;
+        private System.Windows.Forms.DataGridViewTextBoxColumn type_visit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn access;
     }
 }

@@ -29,28 +29,26 @@ namespace MainForm
             {
                 // Подключение к считывателю.
                 // Подключение по введенному IP или имени  считывателя
-                //string hostname = Convert.ToString(TextIP.Text);(снять)
-                //reader.Connect(hostname);//(снять)
-                if (true)//reader.IsConnected(заменить на true)
+                reader.Connect("");
+                if (reader.IsConnected)
                 {
                     Random rand = new Random();
                     TimerTags.Interval = rand.Next(10000, 15000);
                     TimerTags.Enabled = true;
                     // Подготовка к считыванию
-                    //if (!reader.QueryStatus().IsSingulating)(снять)
-                    //{(снять)
-                    //    // Старт считывания
-                    //    reader.Start();(снять)
-                    //    Add_RoSpec();(снять)
-                    //    Enable_RoSpec();(снять)
-                    //}(снять)
-                    // Вызов метода отображения информации с меток
-                    //reader.TagsReported += OnTagsReported;(снять)
+                    if (!reader.QueryStatus().IsSingulating)
+                    {
+                        // Старт считывания
+                        reader.Start();
+                        Add_RoSpec();
+                        Enable_RoSpec();
+                    }
+                    //Вызов метода отображения информации с меток
+                    reader.TagsReported += OnTagsReported;
                 }
                 else
                 {
-                    MessageBox.Show("Считыватель не подключен!", "Подключение", MessageBoxButtons.OK);
-                    //reader.Disconnect();(снять)
+                    MessageBox.Show("Считыватель не подключен!", "Подключение...", MessageBoxButtons.OK);
                     TimerTags.Enabled = false;
                     fsettings.ShowDialog();
                     TimerTags.Enabled = true;
@@ -70,16 +68,6 @@ namespace MainForm
 
         private void Main_Load(object sender, EventArgs e)
         {
-            //historyvisitBindingSource.DataSource = from c in Context.history_visit
-            //                                       join p in
-            //       Context.cars on c.number_car equals p.id
-            //                                       select new
-            //                                       {
-            //                                           id = c.id,
-            //                                           date_visit = c.date_visit,
-            //                                           number_car = p.number_car,
-            //                                           type_visit = c.type_visit
-            //                                       };
 
         }
 
@@ -201,9 +189,8 @@ namespace MainForm
             if (AntennaPortNumber == 1) tvisit = "Въезд";
             else tvisit = "Выезд";
             ViewHistory.Focus();
-            //JoinDTBindingSource.Add(now, carT, tvisit, avisit);
             ViewHistory.Rows.Add(now, carT, tvisit, avisit);
-            BoxNumberCar.Text = ViewHistory.CurrentRow.Cells[1].Value.ToString();
+            //BoxNumberCar.Text = ViewHistory.CurrentRow.Cells[number_car.Index].Value.ToString();
             //ListTags.Items.Add(counter + ") Дата и время: " + now + "\n   Номер антенны: " + AntennaPortNumber);
             //ListTags.Items.Add("\n   EPC: " + Epc + "\n   № машины: " + machine + "\n   Тип проезда: " + tvisit + "\n   Доступ: " + avisit);
             if (visit == false)
@@ -240,23 +227,23 @@ namespace MainForm
                     e.Cancel = true;
                 }
                 // Отключение считывания считывателя
-                //if (reader.QueryStatus().IsSingulating)(снять)
-                //{(снять)
-                //    Delete_RoSpec();(снять)
-                //    reader.Stop();(снять)
-                //}(снять)
-                if (true)//reader.IsConnected(заменить на true)
+                if (reader.QueryStatus().IsSingulating)
+                {
+                    Delete_RoSpec();
+                    reader.Stop();
+                }
+                if (reader.IsConnected)
                 {
                     try
                     {
                         // Отключение считывания считывателя
-                        //if (reader.QueryStatus().IsSingulating)(снять)
-                        //{(снять)
-                        //    Delete_RoSpec();(снять)
-                        //    reader.Stop();(снять)
-                        //}(снять)
-                        // Отсоединение от считывателя
-                        //reader.Disconnect();(снять)
+                        if (reader.QueryStatus().IsSingulating)
+                        {
+                               Delete_RoSpec();
+                                reader.Stop();
+                        }
+                       // Отсоединение от считывателя
+                       reader.Disconnect();
                     }
                     catch (OctaneSdkException ex)
                     {
