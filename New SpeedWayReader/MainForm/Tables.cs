@@ -172,7 +172,7 @@ namespace MainForm
 
         private void BoxSearchHistoryVisit_TextChanged(object sender, EventArgs e)
         {
-
+            historyvisitBindingSource.DataSource = Context.history_visit.Where(c=> c.date_visit.Value.Date==Convert.ToDateTime(BoxSearchHistoryVisit.Text));
         }
     }
 }

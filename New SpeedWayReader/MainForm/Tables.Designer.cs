@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.История_проездов = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
@@ -791,9 +791,9 @@
             // 
             this.datevisitDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.datevisitDataGridViewTextBoxColumn.DataPropertyName = "date_visit";
-            dataGridViewCellStyle1.Format = "D";
-            dataGridViewCellStyle1.NullValue = null;
-            this.datevisitDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "D";
+            dataGridViewCellStyle2.NullValue = null;
+            this.datevisitDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.datevisitDataGridViewTextBoxColumn.FillWeight = 111.5385F;
             this.datevisitDataGridViewTextBoxColumn.HeaderText = "Дата проезда";
             this.datevisitDataGridViewTextBoxColumn.Name = "datevisitDataGridViewTextBoxColumn";
