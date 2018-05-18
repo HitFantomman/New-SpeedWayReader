@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnSettings = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.BoxNumberCar = new System.Windows.Forms.TextBox();
             this.ViewHistory = new System.Windows.Forms.DataGridView();
@@ -39,20 +39,22 @@
             this.datevisitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numbercarDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typevisitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimerTags = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.ViewHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.historyvisitBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // BtnSettings
             // 
-            this.button1.AutoSize = true;
-            this.button1.Location = new System.Drawing.Point(16, 29);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(193, 39);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Текущие настройки";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtnSettings.AutoSize = true;
+            this.BtnSettings.Location = new System.Drawing.Point(16, 29);
+            this.BtnSettings.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.BtnSettings.Name = "BtnSettings";
+            this.BtnSettings.Size = new System.Drawing.Size(193, 39);
+            this.BtnSettings.TabIndex = 0;
+            this.BtnSettings.Text = "Текущие настройки";
+            this.BtnSettings.UseVisualStyleBackColor = true;
+            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // label1
             // 
@@ -87,6 +89,7 @@
             this.ViewHistory.Name = "ViewHistory";
             this.ViewHistory.Size = new System.Drawing.Size(957, 373);
             this.ViewHistory.TabIndex = 3;
+            this.ViewHistory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ViewHistory_MouseClick);
             // 
             // label2
             // 
@@ -130,6 +133,10 @@
             this.typevisitDataGridViewTextBoxColumn.HeaderText = "Тип проезда";
             this.typevisitDataGridViewTextBoxColumn.Name = "typevisitDataGridViewTextBoxColumn";
             // 
+            // TimerTags
+            // 
+            this.TimerTags.Tick += new System.EventHandler(this.TimerTags_Tick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -139,7 +146,7 @@
             this.Controls.Add(this.ViewHistory);
             this.Controls.Add(this.BoxNumberCar);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnSettings);
             this.Controls.Add(this.MenuMain);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -148,6 +155,8 @@
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главная форма";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ViewHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.historyvisitBindingSource)).EndInit();
@@ -158,7 +167,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnSettings;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox BoxNumberCar;
         private System.Windows.Forms.DataGridView ViewHistory;
@@ -168,5 +177,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numbercarDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn typevisitDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource historyvisitBindingSource;
+        private System.Windows.Forms.Timer TimerTags;
     }
 }

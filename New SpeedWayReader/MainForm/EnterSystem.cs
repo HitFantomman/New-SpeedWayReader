@@ -19,7 +19,7 @@ namespace MainForm
 
         private void BtnEnter_Click(object sender, EventArgs e)
         {
-            if (BoxPassword.Text == "Admin" && BoxLogin.Text == "Admin")
+            if (BoxPassword.Text == "Admin" && BoxLogin.Text == "Admin" || BoxPassword.Text == "User" && BoxLogin.Text == "User")
             {
                 this.Hide();
                 Main formmain = new Main();
