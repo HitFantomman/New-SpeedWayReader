@@ -75,11 +75,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EditForms\FormEditCarsRFID.cs">
+    <Compile Include="EnterSystem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditForms\FormEditCarsRFID.Designer.cs">
-      <DependentUpon>FormEditCarsRFID.cs</DependentUpon>
+    <Compile Include="EnterSystem.Designer.cs">
+      <DependentUpon>EnterSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Tables.cs">
       <SubType>Form</SubType>
@@ -89,8 +95,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="EditForms\FormEditCarsRFID.resx">
-      <DependentUpon>FormEditCarsRFID.cs</DependentUpon>
+    <EmbeddedResource Include="EnterSystem.resx">
+      <DependentUpon>EnterSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tables.resx">
       <DependentUpon>Tables.cs</DependentUpon>
