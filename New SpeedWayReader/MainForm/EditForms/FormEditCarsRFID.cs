@@ -13,10 +13,11 @@ namespace MainForm.EditForms
 {
     public partial class FormEditCarsRFID : Form
     {
-        SystemRFIDsEntities Context = new SystemRFIDsEntities();
+        SystemRFIDsEntities Context;
         public FormEditCarsRFID(cars_c_RFID obj)
         {
             InitializeComponent();
+            Context = new SystemRFIDsEntities();
             if (obj == null)
             {
                 carscRFIDBindingSource.DataSource = new cars_c_RFID();
@@ -27,6 +28,12 @@ namespace MainForm.EditForms
                 carscRFIDBindingSource.DataSource = obj;
                 Context.cars_c_RFID.Attach(carscRFIDBindingSource.Current as cars_c_RFID);
             }
+        }
+
+        private void FormEditCarsRFID_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Context.SaveChanges();
+            e.Cancel = false;
         }
     }
 }

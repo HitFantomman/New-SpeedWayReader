@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.BoxDateRecord = new System.Windows.Forms.TextBox();
+            this.carscRFIDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.BoxEPC = new System.Windows.Forms.ComboBox();
             this.BoxNumberCar = new System.Windows.Forms.ComboBox();
             this.BoxStatusActive = new System.Windows.Forms.ComboBox();
@@ -38,7 +39,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.BtnSave = new System.Windows.Forms.Button();
-            this.carscRFIDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.carscRFIDBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,11 +59,13 @@
             this.BoxDateRecord.Size = new System.Drawing.Size(271, 29);
             this.BoxDateRecord.TabIndex = 1;
             // 
+            // carscRFIDBindingSource
+            // 
+            this.carscRFIDBindingSource.DataSource = typeof(DataModel.cars_c_RFID);
+            // 
             // BoxEPC
             // 
             this.BoxEPC.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carscRFIDBindingSource, "epc", true));
-            this.BoxEPC.DataSource = this.carscRFIDBindingSource;
-            this.BoxEPC.DisplayMember = "epc";
             this.BoxEPC.FormattingEnabled = true;
             this.BoxEPC.Location = new System.Drawing.Point(199, 70);
             this.BoxEPC.Name = "BoxEPC";
@@ -73,8 +75,6 @@
             // BoxNumberCar
             // 
             this.BoxNumberCar.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carscRFIDBindingSource, "number_car", true));
-            this.BoxNumberCar.DataSource = this.carscRFIDBindingSource;
-            this.BoxNumberCar.DisplayMember = "number_car";
             this.BoxNumberCar.FormattingEnabled = true;
             this.BoxNumberCar.Location = new System.Drawing.Point(199, 106);
             this.BoxNumberCar.Name = "BoxNumberCar";
@@ -84,8 +84,6 @@
             // BoxStatusActive
             // 
             this.BoxStatusActive.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carscRFIDBindingSource, "status_active", true));
-            this.BoxStatusActive.DataSource = this.carscRFIDBindingSource;
-            this.BoxStatusActive.DisplayMember = "status_active";
             this.BoxStatusActive.FormattingEnabled = true;
             this.BoxStatusActive.Location = new System.Drawing.Point(199, 142);
             this.BoxStatusActive.Name = "BoxStatusActive";
@@ -129,10 +127,6 @@
             this.BtnSave.Text = "Сохранить";
             this.BtnSave.UseVisualStyleBackColor = true;
             // 
-            // carscRFIDBindingSource
-            // 
-            this.carscRFIDBindingSource.DataSource = typeof(DataModel.cars_c_RFID);
-            // 
             // FormEditCarsRFID
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
@@ -153,6 +147,7 @@
             this.Name = "FormEditCarsRFID";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Форма редактирования";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditCarsRFID_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.carscRFIDBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

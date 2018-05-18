@@ -13,7 +13,7 @@ namespace MainForm
 {
     public partial class Tables : Form
     {
-        SystemRFIDsEntities Context = new SystemRFIDsEntities();
+        SystemRFIDsEntities Context;
         public Tables()
         {
             InitializeComponent();
@@ -21,6 +21,7 @@ namespace MainForm
 
         private void Tables_Load(object sender, EventArgs e)
         {
+            Context = new SystemRFIDsEntities();
             historyvisitBindingSource.DataSource = Context.history_visit.ToList();
             carscRFIDBindingSource.DataSource = Context.cars_c_RFID.ToList();
             statusactiveBindingSource.DataSource = Context.status_active.ToList();
@@ -33,17 +34,41 @@ namespace MainForm
 
         private void BtnAddCarsRFID_Click(object sender, EventArgs e)
         {
-
+            using (EditForms.FormEditCarsRFID frmCarsRFID=new EditForms.FormEditCarsRFID(null))
+            {
+                if (frmCarsRFID.ShowDialog()==DialogResult.OK)
+                {
+                    carscRFIDBindingSource.DataSource = Context.cars_c_RFID.ToList();
+                }
+            }
         }
 
         private void BtnEditCarsRFID_Click(object sender, EventArgs e)
         {
-
+            if (carscRFIDBindingSource.Current == null)
+            {
+                return;
+            }
+            using (EditForms.FormEditCarsRFID frmCarsRFID = new EditForms.FormEditCarsRFID(carscRFIDBindingSource.Current as cars_c_RFID))
+            {
+                if (frmCarsRFID.ShowDialog() == DialogResult.OK)
+                {
+                    carscRFIDBindingSource.DataSource = Context.cars_c_RFID.ToList();
+                }
+            }
         }
 
         private void BtnDeleteCarsRFID_Click(object sender, EventArgs e)
         {
-
+            if (carscRFIDBindingSource.Current != null)
+            {
+                if (MessageBox.Show("Удалить эту запись?", "Сообщение", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Context.cars_c_RFID.Remove(carscRFIDBindingSource.Current as cars_c_RFID);
+                    carscRFIDBindingSource.RemoveCurrent();
+                    Context.SaveChanges();
+                }
+            }
         }
     }
 }
