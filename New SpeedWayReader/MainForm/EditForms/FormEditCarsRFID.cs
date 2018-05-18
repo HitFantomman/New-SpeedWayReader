@@ -26,7 +26,6 @@ namespace MainForm.EditForms
             else
             {
                 carscRFIDBindingSource.DataSource = obj;
-                Context.cars_c_RFID.Attach(carscRFIDBindingSource.Current as cars_c_RFID);
             }
         }
 
