@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DataModel;
+﻿using DataModel;
 using Impinj.OctaneSdk;
 using Org.LLRP.LTK.LLRPV1;
 using Org.LLRP.LTK.LLRPV1.DataType;
-using Org.LLRP.LTK.LLRPV1.Impinj;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace MainForm
 {
@@ -222,12 +215,6 @@ namespace MainForm
                 else if (result == DialogResult.No)
                 {
                     e.Cancel = true;
-                }
-                // Отключение считывания считывателя
-                if (reader.QueryStatus().IsSingulating)
-                {
-                    Delete_RoSpec();
-                    reader.Stop();
                 }
                 if (reader.IsConnected)
                 {

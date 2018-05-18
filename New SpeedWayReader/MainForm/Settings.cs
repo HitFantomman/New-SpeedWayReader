@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Impinj.OctaneSdk;
+﻿using Impinj.OctaneSdk;
 using Org.LLRP.LTK.LLRPV1;
-using Org.LLRP.LTK.LLRPV1.DataType;
-using Org.LLRP.LTK.LLRPV1.Impinj;
+using System;
+using System.Windows.Forms;
 
 namespace MainForm
 {
