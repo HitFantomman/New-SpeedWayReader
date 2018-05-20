@@ -71,6 +71,7 @@
             this.BoxNumberCar.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BoxNumberCar.Location = new System.Drawing.Point(730, 58);
             this.BoxNumberCar.Name = "BoxNumberCar";
+            this.BoxNumberCar.ReadOnly = true;
             this.BoxNumberCar.Size = new System.Drawing.Size(193, 26);
             this.BoxNumberCar.TabIndex = 2;
             this.BoxNumberCar.Text = "Неопознанный номер";
